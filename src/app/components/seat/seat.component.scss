@@ -1,0 +1,42 @@
+$primary-color: #e50914;
+$available-color: #4CAF50; // Green
+$booked-color: #777;      // Gray
+$selected-color: #FFC107; 
+
+.seat{
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.15s,transform 0.1s;
+    background-color: $available-color;
+    color: white;
+    font-weight: bold;
+    outline: none;
+
+    &:hover:not(:disabled){
+        transform: scale(1.05);
+        box-shadow: 0 0 5px $available-color;
+    }
+
+    &.booked{
+        background-color: $booked-color;
+        cursor: not-allowed;
+        color: #bbb;
+        border-color: #555;
+    }
+
+    &.selected{
+        background-color: $selected-color;
+        color: #333;
+        border-color: darken($selected-color, 15%);
+        box-shadow: 0 0 8px $selected-color;
+    }
+
+    &:disabled{
+        opacity: 0.6;
+    }
+}

@@ -1,0 +1,27 @@
+<div class="navbar">
+    <div class="logo-container">
+        <a [routerLink]="['/movies']" class="logo">🎬 Movie Booker</a>
+    </div>
+
+    <div class="nav-links">
+        <a [routerLink]="['/movies']" routerLinkActive="active" class="nav-item">
+            Movies
+        </a>
+        @if(isLoggedIn){
+            <a [routerLink]="['/my-bookings']" routerLinkActive="active" class="nav-item">
+                My Bookings
+            </a>
+            <button (click)="logout()" class="auth-button logout-button">
+                Logout
+            </button>
+        }
+        @else {
+            <a [routerLink]="['/auth/login']" routerLinkActive="active" class="auth-link nav-item">
+                Login
+            </a>
+            <a [routerLink]="['/auth/register']" class="auth-button register-button">
+                Register
+            </a>
+        }
+    </div>
+</div>

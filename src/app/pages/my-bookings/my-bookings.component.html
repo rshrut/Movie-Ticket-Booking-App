@@ -1,0 +1,52 @@
+<div class="bookings-page">
+      <div class="page-header">
+        <h1>My Booking History</h1>
+        <p>Manage and view your confirmed movie tickets</p>
+      </div>
+
+      <div *ngIf="isLoading" class="state-msg">
+        <div class="spinner"></div>
+        <p>Fetching your movie history...</p>
+      </div>
+
+      <div *ngIf="!isLoading && bookings.length === 0" class="state-msg empty">
+        <div class="icon">🎬</div>
+        <h2>No bookings found</h2>
+        <p>You haven't booked any movies yet. Ready for a show?</p>
+        <a routerLink="/movies" class="browse-btn">Explore Now</a>
+      </div>
+
+      <div class="bookings-grid" *ngIf="!isLoading && bookings.length > 0">
+        <div class="booking-card" *ngFor="let booking of bookings">
+          <div class="movie-info">
+            <div class="poster-wrapper">
+                <img [src]="booking.moviePoster" [alt]="booking.movieTitle">
+                <span class="status-tag" [ngClass]="booking.status.toLowerCase()">{{ booking.status }}</span>
+            </div>
+            <div class="text">
+              <span class="booking-id">ID: #{{ booking.bookingId }}</span>
+              <h3>{{ booking.movieTitle }}</h3>
+              <p class="theatre"><i class="location-icon"></i> {{ booking.theatreName }}</p>
+              <p class="time">📅 {{ booking.showTime | date:'EEEE, d MMM' }} • {{ booking.showTime | date:'shortTime' }}</p>
+            </div>
+          </div>
+          
+          <div class="booking-stats">
+            <div class="stat">
+              <label>Seats</label>
+              <span class="seats-text">{{ booking.seats }}</span>
+            </div>
+            <div class="stat">
+              <label>Total Paid</label>
+              <span class="amount">{{ booking.totalAmount | currency:'INR' }}</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+             <a [routerLink]="['/ticket', booking.bookingId]" class="view-ticket-btn">
+               View Digital Ticket
+             </a>
+          </div>
+        </div>
+      </div>
+    </div>

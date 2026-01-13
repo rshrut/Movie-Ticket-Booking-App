@@ -1,0 +1,60 @@
+$success-color: #4caf50; // Green
+$error-color: #f44336;   // Red
+$info-color: #2196f3;    // Blue
+
+.snackbar-container{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-width: 300px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    color: white;
+    transition: bottom 0.3s ease-in-out;
+}
+
+.snackbar-message{
+    flex-grow: 1;
+    font-size: 1em;
+}
+
+.snackbar-dismiss{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 15px;
+    padding: 0;
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+
+    &:hover{
+        opacity: 1;
+    }
+}
+
+.snackbar-success {
+    background-color: $success-color;
+}
+
+.snackbar-error {
+    background-color: $error-color;
+}
+
+.snackbar-info {
+    background-color: $info-color;
+}
+
+.snackbar-warning {
+    background-color: #ff9800; /* Orange */
+}

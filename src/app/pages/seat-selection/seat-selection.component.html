@@ -1,0 +1,54 @@
+<div class="booking-container">
+  <h1>Book Seats for {{ movie?.title }}</h1>
+
+  <div class="summary-bar">
+    <p>
+      Theatre: <strong>{{ theatreName || "Loading..." }}</strong>
+    </p>
+    <p>
+      Time: <strong>{{ showTimeLabel || "Loading..." }}</strong>
+    </p>
+    <p>
+      Tickets: <strong>{{ selectedSeats.length }}</strong
+      >(at {{ ticketPrice | currency : "INR" }})
+    </p>
+    <p class="total">
+      Total:<strong>{{totalAmount | currency:'INR'}}</strong>
+    </p>
+  </div>
+
+  <div class="seat-map-wrapper">
+    <div class="screen-indicator">Screen This Way</div>
+    <div class="seat-map">
+      @for(row of seatMap; track $index){
+      <div class="seat-row">
+        <span class="row-label">{{ rows[$index] }}</span>
+        @for(seat of row; track seat.id){
+        <app-seat
+          [id]="seat.id"
+          [isBooked]="seat.isBooked"
+          [isSelected]="selectedSeats.includes(seat.id)"
+          (selectSeat)="handleSeatClick($event, seat.isBooked)"
+        >
+        </app-seat>
+        }
+      </div>
+      }
+    </div>
+
+    <div class="legend">
+      <span><i class="legend-available"></i>Available</span>
+      <span><i class="legend-booked"></i>Booked</span>
+      <span><i class="legend-selected"></i>Selected</span>
+    </div>
+  </div>
+
+  <div class="action-footer">
+    <button
+     class="proceed-button"
+     (click)="proceedToPayment()"
+     [disabled]="selectedSeats.length === 0">
+     Proceed to Payment ({{totalAmount | currency:'INR'}})
+    </button>
+  </div>
+</div>

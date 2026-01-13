@@ -1,0 +1,10 @@
+@if(notification$ | async; as notification){
+    <div class="snackbar-container" [ngClass]="['snackbar-' + notification.type]">
+        <div class="snackbar-message">
+            {{notification.message}}
+        </div>
+        <button class="snackbar-dismiss" (click)="dismiss()">
+            &times;
+        </button>
+    </div>
+}

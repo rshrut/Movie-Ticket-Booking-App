@@ -1,0 +1,7 @@
+<div class="movie-card" [routerLink]="[`/movies/${movie.id}`]">
+    <img [src]="movie.posterUrl" [alt]="movie.title">
+    <h3>{{movie.title}}</h3>
+    <p>Genre: {{movie.genre}}</p>
+    <p>Rating: {{movie.rating}}</p>
+    <p>Price: {{movie.price  | currency:'INR'}}</p>
+</div>

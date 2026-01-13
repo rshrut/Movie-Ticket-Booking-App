@@ -1,0 +1,58 @@
+<div class="ticket-page-container">
+    @if(ticket){
+        <div class="ticket-card">
+            <div class="header">
+                <p>BOOKING CONFIRMED</p>
+                <h1>{{ ticket.movie.title }}</h1>
+            </div>
+
+            <div class="details-section">
+                <div class="detail-row">
+                    <p><strong>Booking Id</strong></p>
+                    <span>#{{ticket.bookingId}}</span>
+                </div>
+                 <div class="detail-row">
+                    <p><strong>Confirmation Date</strong></p>
+                    <span>{{ ticket.bookingDate }}</span>
+                </div>
+            </div>
+
+            <div class="ticket-break"></div>
+
+            <div class="venue-section">
+                <div class="detail-block">
+                    <h4>Venue & Time</h4>
+                    <p class="main-info">{{ ticket.theatreName }}</p>
+                    <p class="sub-info">{{ ticket.bookingDate }} &#64; {{ ticket.showTime }}</p>
+                </div>
+                <div class="detail-block">
+                    <h4>Seats & Total</h4>
+                    <p class="main-info seats-list">{{ ticket.selectedSeats.join(', ') }}</p>
+                    <p class="sub-info">Total: {{ ticket.totalAmount | currency:'INR' }}</p>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-code-box">
+                    <p>{{ ticket.confirmationCode }}</p>
+                    <div class="mock-qr"></div>
+                </div>
+
+                <div class="qr-info">
+                    <p>Scan this code at the theatre entry.</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <button class="download-button" (click)="downloadTicket()">
+                    Download E-Ticket (PDF)
+                </button>
+            </div>
+        </div>
+    }
+    @else{
+        <div class="loading-message">
+            <p>Loading ticket details or invalid booking ID...</p>
+        </div>
+    }
+</div>

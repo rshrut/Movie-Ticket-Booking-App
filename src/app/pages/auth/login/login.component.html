@@ -1,0 +1,40 @@
+<div class="auth-page-container">
+  <div class="login-card">
+    <h1>Sign In to Movie Booker</h1>
+    <p>Welcome back! Enter your details to continue.</p>
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+            type="email"
+            name="email"
+            placeholder="your.email@example.com"
+            required
+            [(ngModel)]="user.email"
+            >
+        </div>
+
+        <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="••••••••" 
+          required
+          [(ngModel)]="user.password" 
+        />
+      </div>
+
+      <button type="submit" class="login-button">
+        Login
+      </button>
+    </form>
+
+    <p class="auth-footer">
+      Don't have an account? 
+      <a [routerLink]="['/auth/register']" [queryParams]="{ returnUrl: returnUrl }">Sign Up Here</a>
+    </p>
+  </div>
+</div>

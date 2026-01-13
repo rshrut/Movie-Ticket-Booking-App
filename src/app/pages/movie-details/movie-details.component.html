@@ -1,0 +1,59 @@
+<ng-container *ngIf="movie">
+    <div class="movie-detail-container">
+        <div class="header-section">
+            <img [src]="movie.posterUrl" [alt]="movie.title" class="movie-poster">
+            <div class="info-block">
+                <h1>{{movie.title}}</h1>
+                <div class="meta-data">
+                    <span>{{movie.genre}}</span>
+                    <span>|</span>
+                    <span>{{movie.duration}}min</span>
+                    <span>|</span>
+                    <span>Language: {{movie.language || 'English'}}</span>
+                </div>
+                <div class="rating-box">
+                    <span class="rating-score">{{movie.rating}}</span>
+                </div>
+
+                <p class="description">{{movie.description || 'A highly anticipated film with stunning visuals and compelling storyline.'}}</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="showtime-section">
+            <h2>Available Showtimes in {{ movie.city }}</h2>
+            <div class="theatre-list">
+                @for(group of showtimesGrouped;  track group.theatreId){
+                    <div class="theatre-card">
+                        <h3 class="theatre-name">
+                            {{group.theatreName}}
+                        </h3>
+                        <div class="showtime-pills">
+                            @for(time of group.times; track time.id){
+                                <a [routerLink]="['/movies',movie.id,'booking']"
+                                [queryParams]="{
+                                    showtimeId: time.id,
+                                    time: time.startTime | date:'shortTime',
+                                    theatreName: group.theatreName
+                                }"
+                                class="showtime-pill">
+                                {{time.startTime | date: 'shortTime'}}
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+                @empty {
+                    <p class="no-shows">No shows available for this movie.</p>
+                }
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="!movie">
+    <div class="loading-message">
+        Movie details loading or not found...
+    </div>
+</ng-container>

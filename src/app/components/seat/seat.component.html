@@ -1,0 +1,6 @@
+<button class="seat"
+    [class.booked]="isBooked"
+    [class.selected]="isSelected"
+    [disabled] = "isBooked"
+    (click) = "selectSeat.emit(id)"
+>{{id}}</button>

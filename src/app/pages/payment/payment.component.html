@@ -1,0 +1,55 @@
+<div class="payment-container" *ngIf="bookingData">
+  <h1>Confirm & Pay</h1>
+
+  <div class="summary-card">
+    <h2>Booking summary</h2>
+    <div class="summary-details">
+      <p><strong>Movie: </strong>{{ bookingData.movie.title }}</p>
+      <p><strong>Theatre: </strong>{{ theatreName }}</p>
+      <p><strong>Show Time: </strong>{{ bookingData.showTime }}</p>
+      <p><strong>Seats: </strong>{{ bookingData.selectedSeats.join(", ") }}</p>
+      <p class="total-amount">
+        Total Payable:
+        <strong>{{ bookingData.totalAmount | currency : "INR" }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <div class="payment-methods-card">
+    <h2>Select Payment Method</h2>
+
+    <div class="options-grid">
+      <label class="payment-option">
+        <input type="radio" name="payment" value="card" checked />
+        <span class="custom-radio">Credit/Debit Card</span>
+      </label>
+      <label class="payment-option">
+        <input type="radio" name="payment" value="upi" />
+        <span class="custom-radio">UPI (GPay/PhonePe)</span>
+      </label>
+      <label class="payment-option">
+        <input type="radio" name="payment" value="wallet" />
+        <span class="custom-radio"></span> Wallet (Paytm/MobiKwik)
+      </label>
+    </div>
+
+    <button
+    class="pay-button"
+     (click)="processPayment()"
+     [disabled]="paymentStatus === 'processing'">
+     @if(paymentStatus === 'processing'){
+      Processing...
+     }
+     @else if(paymentStatus === 'failed'){
+      Retry Payment
+     }
+     @else {
+      Pay {{ bookingData.totalAmount | currency:'INR'}}
+     }
+    </button>
+
+    @if(paymentStatus === 'failed'){
+      <p class="payment-error">Payment failed. Please try again or use another method.</p>
+    }
+  </div>
+</div>

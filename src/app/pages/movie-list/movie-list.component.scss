@@ -1,0 +1,21 @@
+$card-gap: 20px;
+$card-min-width: 250px;
+
+.movie-grid{
+    padding: 0 $card-gap;
+    margin: 0 auto;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($card-min-width, 350px));
+    justify-content: center;
+    gap: $card-gap;
+    transition: all 0.3s ease-in-out;
+}
+
+
+@media (max-width: 600px){
+    .movie-grid{
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+}
