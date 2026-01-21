@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 
 
@@ -31,7 +32,7 @@ export interface Finalticket extends BookingData {
 export class BookingStateService {
   private bookingSource = new BehaviorSubject<BookingData | null>(null);
   currentBooking$ = this.bookingSource.asObservable();
-    private apiUrl = 'http://localhost:8080/api/v1/bookings';
+    private apiUrl = `${environment.apiUrl}/bookings`;
   constructor(private http: HttpClient) { }
 
   setBookingData(data: BookingData): void {

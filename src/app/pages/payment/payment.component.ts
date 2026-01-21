@@ -6,6 +6,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { catchError, delay, of, timer } from 'rxjs';
 import { NotificationService } from '../../shared/services/notification.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-payment',
@@ -50,24 +51,8 @@ export class PaymentComponent implements OnInit{
       totalAmount: this.bookingData.totalAmount
     }
 
-    // of(Math.random() > 0.1)
-    // .pipe(delay(2000))
-    // .subscribe(isSuccess => {
-    //   if(isSuccess){
-    //     this.paymentStatus = 'success';
-    //     const mockBookingId = Math.floor(Math.random() * 100000);
-    //     this.notificationService.success('Payment successful! Redirecting to ticket...')
-    //     timer(500).subscribe(() => {
-    //       this.router.navigate(['/ticket', mockBookingId]);
-    //     })
-    //   }
-    //   else{
-    //     this.paymentStatus = 'failed';
-    //     this.notificationService.error('Payment failed. Please try again.');
-    //   }
-    // })
 
-    this.http.post<any>('http://localhost:8080/api/v1/bookings', bookingRequest)
+    this.http.post<any>(`${environment.apiUrl}/bookings`, bookingRequest)
       .pipe(
         catchError(err => {
           this.paymentStatus = 'failed';

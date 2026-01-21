@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { RegisterRequest } from "../models/registerRequest.model";
 import { LoginRequest } from "../models/loginRequest.model";
+import { environment } from "../../environments/environment.prod";
 
 export interface AuthResponse {
     token: string;
@@ -14,7 +15,7 @@ export interface AuthResponse {
 })
 
 export class AuthService {
-    private apiUrl = 'http://localhost:8080/api/v1/auth';
+    private apiUrl = `${environment.apiUrl}/auth`;
     private tokenKey = 'auth_token';
     private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
     isLoggedIn$ = this.isLoggedInSubject.asObservable();
