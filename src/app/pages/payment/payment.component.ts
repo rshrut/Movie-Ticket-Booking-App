@@ -6,7 +6,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { catchError, delay, of, timer } from 'rxjs';
 import { NotificationService } from '../../shared/services/notification.service';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-payment',

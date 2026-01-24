@@ -30,11 +30,12 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (error.status === 403) {
                     const currentToken = this.authService.getToken();
                     if(currentToken){
-                        console.warn('403 Forbidden: This might be a CORS error or restricted access. Not logging out yet.');
-                        this.notificationService.error('Access Denied: You do not have permission for this action.');
+                        console.warn('403 Forbidden: Token rejected by server. Logging out.');
+                        this.handleSessionExpired('Access Denied: Your session is invalid. Please login again.');
                     }
                      else{
                         this.notificationService.error('Please login to continue.');
+                        this.router.navigate(['/auth/login']);
                     }
                 }
                 return throwError(() => error);
@@ -44,9 +45,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private handleSessionExpired(message: string): void{
         if(this.authService.getToken()){
-            this.notificationService.error(message);
             this.authService.logout();
-
+            this.notificationService.error(message);
             this.router.navigate(['/auth/login'],{
                 queryParams: { returnUrl: this.router.url }
             })

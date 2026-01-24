@@ -1,5 +1,28 @@
-<div class="movie-grid">
-    @for(movie of movies; track movie.id){
-        <app-movie-card [movie]="movie"></app-movie-card>
-    }
+<div class="container">
+  <div *ngIf="isLoading" class="loader-container">
+    <div class="spinner"></div>
+    <p>Fetching movies...</p>
+    
+    <div *ngIf="isTakingLong" class="cold-start-warning">
+      <p>💡 <strong>Note:</strong> We're using a free cloud server. It takes about 60 seconds to "wake up" if it hasn't been used recently. Thanks for your patience!</p>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+    <button (click)="loadMovies()" class="btn btn-sm btn-outline-danger ms-3">Retry</button>
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="movie-grid">
+    <div *ngFor="let movie of movies" class="movie-card" [routerLink]="['/movies', movie.id]">
+      <div class="poster-wrapper">
+        <img [src]="movie.posterUrl" [alt]="movie.title">
+        <div class="rating-badge">★ {{ movie.rating }}</div>
+      </div>
+      <div class="movie-info">
+        <h3>{{ movie.title }}</h3>
+        <p class="genre">{{ movie.genre }}</p>
+      </div>
+    </div>
+  </div>
 </div>

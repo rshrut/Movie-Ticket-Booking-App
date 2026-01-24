@@ -3,7 +3,7 @@ import { Movie } from "../models/movie.model";
 import { Observable, of } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Showtime } from "../models/showtime.model";
-import { environment } from "../../environments/environment.prod";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { RegisterRequest } from "../models/registerRequest.model";
 import { LoginRequest } from "../models/loginRequest.model";
-import { environment } from "../../environments/environment.prod";
+import { environment } from "../../environments/environment";
 
 export interface AuthResponse {
     token: string;
