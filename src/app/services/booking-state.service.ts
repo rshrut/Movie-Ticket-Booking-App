@@ -4,21 +4,27 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
-
+export interface TheatreDetails {
+  id: number;
+  name: string;
+  address: string;
+  city: string;
+  seatingCapacity: number;
+}
 
 export interface BookingData {
   movie: Movie; 
   showtimeId: number;      
-  theatreName: string;   
+  theatreName: any;   
   showTime: string;        
   selectedSeats: string[]; 
   totalAmount: number;
 }
 
-export interface Finalticket extends BookingData {
+export interface Finalticket{
   bookingId: number;
   movie: Movie,
-  theatreName: string;
+  theatreName: TheatreDetails;
   showTime: string;
   selectedSeats: string[];
   totalAmount: number;

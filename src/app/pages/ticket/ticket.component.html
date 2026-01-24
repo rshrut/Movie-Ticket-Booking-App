@@ -22,8 +22,8 @@
             <div class="venue-section">
                 <div class="detail-block">
                     <h4>Venue & Time</h4>
-                    <p class="main-info">{{ ticket.theatreName }}</p>
-                    <p class="sub-info">{{ ticket.bookingDate }} &#64; {{ ticket.showTime }}</p>
+                    <p class="main-info">{{ ticket.theatreName.name }}</p>
+                    <p class="sub-info">{{ ticket.bookingDate }} &#64; {{ ticket.showTime | date:'shortTime' }}</p>
                 </div>
                 <div class="detail-block">
                     <h4>Seats & Total</h4>

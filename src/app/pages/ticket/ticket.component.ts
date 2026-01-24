@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { BookingStateService, Finalticket } from '../../services/booking-state.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-ticket',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, DatePipe],
   templateUrl: './ticket.component.html',
   styleUrl: './ticket.component.scss'
 })
@@ -29,6 +29,8 @@ export class TicketComponent implements OnInit{
     ).subscribe({
       next: (ticketData) => {
         this.ticket = ticketData;
+        console.log('ti',ticketData);
+        
       },
       error: (err) => {
         console.error('Failed to load ticket:', err);
