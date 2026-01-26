@@ -1,59 +1,62 @@
 # MovieTicketBookingApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+A modern, responsive Single Page Application (SPA) built with Angular 19. This frontend provides a seamless user journey from browsing movies to selecting seats and generating digital tickets.
 
-## Development server
+🚀 Live Site
 
-To start a local development server, run:
+Check out the live application on Vercel:
+https://movie-ticket-booking-app-woad-kappa.vercel.app
 
-```bash
-ng serve
-```
+🛠 Tech Stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Framework: Angular 19 (Standalone Components)
 
-## Code scaffolding
+Styling: Tailwind CSS & SCSS
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+State Management: RxJS (Observables & BehaviorSubjects)
 
-```bash
-ng generate component component-name
-```
+Icons: FontAwesome
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Deployment: Vercel
 
-```bash
-ng generate --help
-```
+✨ Key Features
 
-## Building
+Dynamic Seat Selection: An interactive seat map with real-time availability updates.
 
-To build the project run:
+Smart Loading: Implementation of "Cold Start" detection to notify users when the free-tier backend is waking up.
 
-```bash
-ng build
-```
+Auth Interceptor: Automated JWT handling—the app automatically attaches tokens to requests and handles session expiration (401/403) by redirecting to login.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Responsive Design: Fully optimized for Mobile, Tablet, and Desktop views.
 
-## Running unit tests
+Seamless Navigation: Built with Angular Router and Protected Guards for secure checkout flows.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+📂 Project Structure
 
-```bash
-ng test
-```
+src/app/pages: Main view components (Movie List, Payment, Ticket).
 
-## Running end-to-end tests
+src/app/services: Core logic for API communication and State management.
 
-For end-to-end (e2e) testing, run:
+src/app/interceptors: Global HTTP handling for Security.
 
-```bash
-ng e2e
-```
+src/app/guards: Route protection logic.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+⚙️ Environment Configuration
 
-## Additional Resources
+The project uses Angular's environment-swapping strategy:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+environment.ts: Configured for local development (localhost:8080).
+
+environment.prod.ts: Configured for production (Render.com URL).
+
+🚀 Getting Started
+
+Install dependencies: npm install
+
+Start the dev server: ng serve
+
+Open http://localhost:4200 in your browser.
+
+🤝 Connectivity Note
+
+This frontend communicates with a Spring Boot backend. Ensure the CORS_ALLOWED_ORIGINS on the backend includes the URL where this frontend is running.
