@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 export interface TheatreDetails {
-  id: number;
+  id: string;
   name: string;
   address: string;
   city: string;
@@ -14,22 +14,45 @@ export interface TheatreDetails {
 
 export interface BookingData {
   movie: Movie; 
-  showtimeId: number;      
+  showtimeId: string;      
   theatreName: any;   
   showTime: string;        
   selectedSeats: string[]; 
   totalAmount: number;
 }
 
-export interface Finalticket{
-  bookingId: number;
-  movie: Movie,
-  theatreName: TheatreDetails;
-  showTime: string;
-  selectedSeats: string[];
-  totalAmount: number;
-  bookingDate: string;
-  confirmationCode: string;
+// export interface Finalticket{
+//   bookingId: string;
+//   movie: Movie,
+//   theatreName: TheatreDetails;
+//   showTime: string;
+//   selectedSeats: string[];
+//   totalAmount: number;
+//   bookingDate: string;
+//   confirmationCode: string;
+// }
+export interface Finalticket {
+    id: string;               // Matches "id" in JSON
+    seatsBooked: string;      // Matches "seatsBooked" (String, not Array)
+    totalPrice: number;       // Matches "totalPrice"
+    status: string;
+    createdAt: string;
+    confirmationCode: string;        // For your booking date
+    showtime: {               // The nested object from Sequelize
+        id: string;
+        startTime: string;
+        movie: {              // Nested Movie
+            title: string;
+            genre: string;
+            duration: number;
+            posterUrl: string;
+        };
+        theatre: {            // Nested Theatre
+            name: string;
+            address: string;
+            city: string;
+        };
+    };
 }
 
 @Injectable({

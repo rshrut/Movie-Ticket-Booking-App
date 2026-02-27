@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
-  imports: [CommonModule,MovieCardComponent, RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss'
 })
@@ -41,6 +41,8 @@ export class MovieListComponent implements OnInit{
       .subscribe({
         next: (data) => {
           this.movies =  data;
+          console.log('movie',this.movies);
+          
         },
         error: (err) => {
           this.error = 'Unable to connect to the server. Please refresh.';

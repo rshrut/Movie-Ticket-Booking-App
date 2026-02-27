@@ -22,20 +22,20 @@ export class MovieService {
         return this.http.get<Movie[]>(this.movieApiUrl);
     }
 
-    getMovieById(id: number): Observable<Movie | undefined> {
+    getMovieById(id: string): Observable<Movie | undefined> {
         console.log("log");
         return this.http.get<Movie>(`${this.movieApiUrl}/${id}`)
     }
 
-    getShowtimesByMovie(movieId: number): Observable<Showtime[]> {
+    getShowtimesByMovie(movieId: string): Observable<Showtime[]> {
         return this.http.get<Showtime[]>(`${this.showtimeApiUrl}/movie/${movieId}`);
     }
 
-    getOccupiedSeats(showtimeId: number): Observable<string[]> {
+    getOccupiedSeats(showtimeId: string): Observable<string[]> {
         return this.http.get<string[]>(`${this.bookingApiUrl}/occupied/${showtimeId}`);
     }
 
-    getBookingById(bookingId: number): Observable<any> {
+    getBookingById(bookingId: string): Observable<any> {
         return this.http.get<any>(`${this.baseUrl}/bookings/${bookingId}`);
     }
 

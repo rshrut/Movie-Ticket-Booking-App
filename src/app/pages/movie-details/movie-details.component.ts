@@ -5,6 +5,7 @@ import { MovieService } from '../../services/movie.service';
 import { catchError, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Showtime } from '../../models/showtime.model';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
@@ -16,7 +17,7 @@ export class MovieDetailsComponent implements OnInit {
   movie: Movie | undefined;
 
   showtimes: Showtime[] = [];
-  showtimesGrouped: { theatreName: string, theatreId: number, times: Showtime[] }[] = [];
+  showtimesGrouped: { theatreName: string, theatreId: string, times: Showtime[] }[] = [];
   isLoading = true;
   error: string | null = null;
 
@@ -26,19 +27,20 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => params.get('id')),
+      filter((id): id is string => id !== null),
       switchMap(id => {
         this.isLoading = true;
         this.error = null;
 
-        const movieId = id ? +id : 0;
-        const movieDetails$ = this.movieService.getMovieById(movieId).pipe(
+        // const movieId = id ? +id : 0;
+        const movieDetails$ = this.movieService.getMovieById(id).pipe(
           catchError(err => {
             console.error('Error fetching movie details:', err);
             this.error = 'Failed to load movie details.';
             return of(undefined as Movie | undefined);
           })
         );
-        const showtimes$ = this.movieService.getShowtimesByMovie(movieId).pipe(
+        const showtimes$ = this.movieService.getShowtimesByMovie(id).pipe(
           catchError(err => {
             console.warn('Error fetching showtimes, but movie details might still load.', err);
             // Return an empty array on error so forkJoin still succeeds
@@ -72,7 +74,7 @@ export class MovieDetailsComponent implements OnInit {
 
 
   groupShowtimes(): void {
-    const groupedMap = new Map<number, { theatreName: string, theatreId: number, times: Showtime[] }>();
+    const groupedMap = new Map<string, { theatreName: string, theatreId: string, times: Showtime[] }>();
     this.showtimes.forEach(showtime => {
 
       if (showtime.theatre) {

@@ -2,7 +2,7 @@ import { Movie } from "./movie.model";
 import { Theatre } from "./theatre.model";
 
 export interface Showtime {
-    id: number;
+    id: string;
     // Full entities returned by Spring Boot (without lazy loading issues)
     movie: Movie;
     theatre: Theatre;

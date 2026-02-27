@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../../models/movie.model';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MovieService } from '../../services/movie.service';
-import { forkJoin, map, of, switchMap, tap } from 'rxjs';
+import { filter, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { CurrencyPipe, CommonModule } from '@angular/common';
 import { SeatComponent } from '../../components/seat/seat.component';
 import { BookingData, BookingStateService } from '../../services/booking-state.service';
@@ -31,7 +31,7 @@ export class SeatSelectionComponent implements OnInit {
   seatsPerRow = 10;
 
   // Data from Query Params
-  showtimeId: number | null = null;
+  showtimeId: string | null = null;
   theatreName: string | null = null;
   showTimeLabel: string | null = null;
 
@@ -48,20 +48,20 @@ export class SeatSelectionComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => params.get('id')),
+      filter((id) => id != null ),
       switchMap(movieId => {
-        const id = movieId ? +movieId : 0;
 
         // Combine QueryParams observable with Movie/OccupiedSeats logic
         return this.route.queryParamMap.pipe(
           tap(queryParams => {
-            this.showtimeId = queryParams.get('showtimeId') ? +queryParams.get('showtimeId')! : null;
+            this.showtimeId = queryParams.get('showtimeId');
             this.theatreName = queryParams.get('theatreName');
             this.showTimeLabel = queryParams.get('time');
           }),
           switchMap(() => {
             // Fetch Movie Details AND Occupied Seats simultaneously
             return forkJoin({
-              movie: this.movieService.getMovieById(id),
+              movie: this.movieService.getMovieById(movieId),
               occupied: this.showtimeId ? this.movieService.getOccupiedSeats(this.showtimeId) : of([])
             });
           })
