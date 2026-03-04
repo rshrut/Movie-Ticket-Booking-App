@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, MovieCardComponent],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss'
 })

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api/v1' // Points to your IntelliJ Spring Boot
+  apiUrl: 'https://movie-ticket-booking-backend-nodejs.onrender.com/api/v1' // Points to your IntelliJ Spring Boot
 };

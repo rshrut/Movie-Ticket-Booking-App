@@ -14,15 +14,9 @@
   </div>
 
   <div *ngIf="!isLoading && !error" class="movie-grid">
-    <div *ngFor="let movie of movies" class="movie-card" [routerLink]="['/movies', movie.id]">
-      <div class="poster-wrapper">
-        <img [src]="movie.posterUrl" [alt]="movie.title">
-        <div class="rating-badge">★ {{ movie.rating }}</div>
-      </div>
-      <div class="movie-info">
-        <h3>{{ movie.title }}</h3>
-        <p class="genre">{{ movie.genre }}</p>
-      </div>
-    </div>
+    <app-movie-card 
+      *ngFor="let movie of movies" 
+      [movie]="movie">
+    </app-movie-card>
   </div>
 </div>
