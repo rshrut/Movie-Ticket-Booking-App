@@ -1,4 +1,4 @@
-// Variables
+
 $primary-color: #e50914;
 $bg-color: #1a1a1a;
 $text-color: #f1f1f1;
@@ -11,8 +11,9 @@ $text-color: #f1f1f1;
     background-color: $bg-color;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    position:sticky; // Changed from absolute to keep it fixed at top
+    position:sticky;
     top: 0;
+    max-width: 100%;
 
     .logo-container {
     .logo {

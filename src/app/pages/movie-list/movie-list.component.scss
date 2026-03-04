@@ -1,5 +1,4 @@
-// $card-gap: 20px;
-// $card-min-width: 250px;
+
 $card-gap: 16px; // Slightly tighter for mobile
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 1024px;
@@ -11,6 +10,7 @@ $desktop-breakpoint: 1024px;
     padding: 0 15px;
     justify-content: center;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 .loader-container {
   display: flex;
