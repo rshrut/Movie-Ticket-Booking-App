@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
-  imports: [CurrencyPipe, RouterModule],
+  imports: [RouterModule],
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.scss'
 })

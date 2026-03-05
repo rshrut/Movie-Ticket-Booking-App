@@ -12,21 +12,21 @@ import { RouterModule } from '@angular/router';
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss'
 })
-export class MovieListComponent implements OnInit{
+export class MovieListComponent implements OnInit {
   movies: Movie[] = [];
   isLoading = true;
   isTakingLong = false;
   error = '';
-  constructor(private movieservice: MovieService){}
+  constructor(private movieservice: MovieService) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.loadMovies();
   }
 
-  loadMovies(): void{
+  loadMovies(): void {
     this.isLoading = true;
     const longLoadTimer = setTimeout(() => {
-      if(this.isLoading){
+      if (this.isLoading) {
         this.isTakingLong = true;
       }
     }, 3000);
@@ -40,14 +40,23 @@ export class MovieListComponent implements OnInit{
       )
       .subscribe({
         next: (data) => {
-          this.movies =  data;
-          console.log('movie',this.movies);
-          
+          this.movies = data;
+          console.log('movie', this.movies);
+
         },
         error: (err) => {
           this.error = 'Unable to connect to the server. Please refresh.';
-          console.error('fetch error',err);
+          console.error('fetch error', err);
         }
       })
+  }
+
+  moveCarousel(element: HTMLElement, direction: number) {
+    // We scroll by the width of the visible container
+    const scrollAmount = element.clientWidth * direction;
+    element.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
   }
 }

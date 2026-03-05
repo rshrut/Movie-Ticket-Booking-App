@@ -8,7 +8,7 @@ import { MovieService } from '../../services/movie.service';
 import { By } from '@angular/platform-browser';
 
 const mockMovie: Movie = {
-  id: 1,
+  id: '1',
   title: 'Test Movie Details',
   posterUrl: '/assets/test.jpg',
   genre: 'Action',
@@ -63,7 +63,7 @@ describe('MovieDetailsComponent', () => {
     const getMovieSpy = spyOn(movieService,'getMovieById').and.returnValue(of(mockMovie));
     fixture.detectChanges();
 
-    expect(getMovieSpy).toHaveBeenCalledWith(1);
+    expect(getMovieSpy).toHaveBeenCalledWith('1');
     expect(component.movie).toEqual(mockMovie);
   })
 
@@ -78,6 +78,6 @@ describe('MovieDetailsComponent', () => {
   it("should render the mock showtime list",() => {
     fixture.detectChanges();
     const theatreCards = fixture.debugElement.queryAll(By.css('.theatre-card'));
-    expect(theatreCards.length).toBe(component.theatres.length);
+    expect(theatreCards.length).toBe(component.showtimes.length);
   })
 });

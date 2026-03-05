@@ -2,21 +2,35 @@
   <div *ngIf="isLoading" class="loader-container">
     <div class="spinner"></div>
     <p>Fetching movies...</p>
-    
+
     <div *ngIf="isTakingLong" class="cold-start-warning">
-      <p>💡 <strong>Note:</strong> We're using a free cloud server. It takes about 60 seconds to "wake up" if it hasn't been used recently. Thanks for your patience!</p>
+      <p>
+        💡 <strong>Note:</strong> We're using a free cloud server. It takes
+        about 60 seconds to "wake up" if it hasn't been used recently. Thanks
+        for your patience!
+      </p>
     </div>
   </div>
 
   <div *ngIf="error" class="alert alert-danger">
     {{ error }}
-    <button (click)="loadMovies()" class="btn btn-sm btn-outline-danger ms-3">Retry</button>
+    <button (click)="loadMovies()" class="btn btn-sm btn-outline-danger ms-3">
+      Retry
+    </button>
   </div>
 
-  <div *ngIf="!isLoading && !error" class="movie-grid">
-    <app-movie-card 
-      *ngFor="let movie of movies" 
-      [movie]="movie">
-    </app-movie-card>
+  <div *ngIf="!isLoading && !error" class="carousel-wrapper">
+    <button class="arrow-btn left" (click)="moveCarousel(movieGrid, -1)">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="movie-grid" #movieGrid>
+      <app-movie-card *ngFor="let movie of movies" [movie]="movie">
+      </app-movie-card>
+    </div>
+
+    <button class="arrow-btn right" (click)="moveCarousel(movieGrid, 1)">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
   </div>
 </div>
